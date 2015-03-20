@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+#-*- coding:utf-8 -*-
 
 """
 TP3 - PAC
@@ -14,6 +14,7 @@ Ce TP a pour but de comprendre les défauts de la fonction
 # Initialisation 
 # -------------------------
 from client import *
+from math import floor
 
 URL = 'http://pac.bouillaguet.info/TP3/rand/'
 
@@ -34,16 +35,19 @@ def chercher_next(x, y):
     # Partie b
     next = 0x7FFF << 16
     print(x)
-    print(next)
-    next = next and x
-    print(next)
+    #print(next)
+    next = next & x
+    #print(next)
     for i in range (1 << 17):   
-        next = next or i
+        next = next | i
         for j in range (2):
-            next = next or (j << 31)
+            next = next | (j << 31)
             # print(next)
-            
-    return None
+            next = next - 12345
+            #next = floor(next)
+            next = next / 1103515245
+
+    return next
     
 # ----------------------------------------------------------------------------
 # Récupération du Challenge 
