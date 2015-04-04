@@ -59,4 +59,16 @@ print(response)
 IV = response['IV']
 
 
-print(chercher_next(IV[0], IV[1]))
+# print(chercher_next(IV[0], IV[1]))
+
+i = 0
+while True:
+    n1 = (IV[1] + i * 32768) * 65536
+    for j in range (65536):
+        tmp = n1 + j
+        n0 = floor((tmp - 12345) / 1103515245)
+        # print(n0)
+        if((n0 / 65536) % 32768 == IV[0]):
+            print("Trouvé")
+    i += 1
+
